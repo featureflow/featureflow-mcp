@@ -13,11 +13,20 @@ import axios, { AxiosInstance, AxiosError } from "axios";
 const API_BASE_URL = process.env.FEATUREFLOW_API_URL || "http://localhost:8080/api";
 const API_TOKEN = process.env.FEATUREFLOW_API_TOKEN || "";
 
+// Determine authentication method based on token format
+// Personal Access Tokens start with "api-" or "int-"
+const isApiKey = API_TOKEN.startsWith("api-") || API_TOKEN.startsWith("int-");
+
 // Create axios instance with authentication
+// Supports both JWT tokens (Bearer) and Personal Access Tokens (X-API-Key or Bearer)
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    Authorization: `Bearer ${API_TOKEN}`,
+    // Use X-API-Key header for Personal Access Tokens, Bearer for JWT
+    ...(isApiKey 
+      ? { "X-API-Key": API_TOKEN }
+      : { Authorization: `Bearer ${API_TOKEN}` }
+    ),
     "Content-Type": "application/json",
   },
   timeout: 30000,
@@ -706,10 +715,12 @@ async function main() {
   // Validate configuration
   if (!API_TOKEN) {
     console.error("Warning: FEATUREFLOW_API_TOKEN is not set. API calls will likely fail.");
+    console.error("Set FEATUREFLOW_API_TOKEN to a Personal Access Token (starts with 'api-') or JWT token.");
   }
 
   console.error(`Featureflow MCP Server starting...`);
   console.error(`API URL: ${API_BASE_URL}`);
+  console.error(`Auth method: ${isApiKey ? "Personal Access Token (X-API-Key)" : "JWT (Bearer)"}`);
 
   const transport = new StdioServerTransport();
   await server.connect(transport);

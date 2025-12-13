@@ -10,7 +10,8 @@ import {
 import axios, { AxiosInstance, AxiosError } from "axios";
 
 // Configuration from environment variables
-const API_BASE_URL = process.env.FEATUREFLOW_API_URL || "http://localhost:8080/api";
+// FEATUREFLOW_API_URL defaults to Featureflow's hosted API
+const API_BASE_URL = process.env.FEATUREFLOW_API_URL || "https://beta.featureflow.io/api";
 const API_TOKEN = process.env.FEATUREFLOW_API_TOKEN || "";
 
 // Determine authentication method based on token format
@@ -718,9 +719,9 @@ async function main() {
     console.error("Set FEATUREFLOW_API_TOKEN to a Personal Access Token (starts with 'api-') or JWT token.");
   }
 
-  console.error(`Featureflow MCP Server starting...`);
-  console.error(`API URL: ${API_BASE_URL}`);
-  console.error(`Auth method: ${isApiKey ? "Personal Access Token (X-API-Key)" : "JWT (Bearer)"}`);
+  console.error(`Featureflow MCP Server v1.0.0 starting...`);
+  console.error(`API URL: ${API_BASE_URL}${API_BASE_URL === "https://beta.featureflow.io/api" ? " (default)" : ""}`);
+  console.error(`Auth: ${isApiKey ? "Personal Access Token" : "JWT Bearer token"}`);
 
   const transport = new StdioServerTransport();
   await server.connect(transport);

@@ -1,26 +1,45 @@
 {
   "name": "featureflow-mcp",
   "version": "1.0.0",
-  "description": "MCP server for Featureflow feature flag management API",
+  "description": "MCP (Model Context Protocol) server for Featureflow feature flag management. Enables AI assistants to manage feature flags, projects, environments, and more.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "featureflow-mcp": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "tsc --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "featureflow",
     "feature-flags",
-    "model-context-protocol"
+    "feature-toggles",
+    "ai",
+    "claude",
+    "cursor",
+    "llm"
   ],
-  "author": "Featureflow",
+  "author": "Featureflow <support@featureflow.io> (https://featureflow.io)",
   "license": "MIT",
+  "homepage": "https://github.com/featureflow/featureflow-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/featureflow/featureflow-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/featureflow/featureflow-mcp/issues"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "axios": "^1.6.0"
@@ -33,4 +52,3 @@
     "node": ">=18.0.0"
   }
 }
-

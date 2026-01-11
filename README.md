@@ -65,6 +65,12 @@ If you're running a self-hosted Featureflow instance:
 
 ## Available Tools
 
+### Account
+
+| Tool | Description |
+|------|-------------|
+| `get_current_user` | Get the currently authenticated user and organization |
+
 ### Projects
 
 | Tool | Description |
@@ -116,6 +122,7 @@ If you're running a self-hosted Featureflow instance:
 
 Once configured, you can ask Claude things like:
 
+- "Who am I logged in as in Featureflow?"
 - "List all my Featureflow projects"
 - "Create a feature called 'new-checkout' in the 'webapp' project"
 - "Enable the 'dark-mode' feature in production"

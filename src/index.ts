@@ -35,6 +35,17 @@ const api: AxiosInstance = axios.create({
 
 // Define all available tools
 const tools: Tool[] = [
+  // ============ ACCOUNT ============
+  {
+    name: "get_current_user",
+    description:
+      "Get the currently authenticated user and their organization. Useful for verifying API token configuration and checking who you are logged in as.",
+    inputSchema: {
+      type: "object" as const,
+      properties: {},
+    },
+  },
+
   // ============ PROJECTS ============
   {
     name: "list_projects",
@@ -500,6 +511,12 @@ function formatError(error: unknown): string {
 async function handleTool(name: string, args: Record<string, unknown>): Promise<string> {
   try {
     switch (name) {
+      // ============ ACCOUNT ============
+      case "get_current_user": {
+        const response = await api.get("/v1/account/me");
+        return JSON.stringify(response.data, null, 2);
+      }
+
       // ============ PROJECTS ============
       case "list_projects": {
         const params: Record<string, unknown> = {};

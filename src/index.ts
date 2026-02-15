@@ -11,7 +11,7 @@ import axios, { AxiosInstance, AxiosError } from "axios";
 
 // Configuration from environment variables
 // FEATUREFLOW_API_URL defaults to Featureflow's hosted API
-const API_BASE_URL = process.env.FEATUREFLOW_API_URL || "https://api.featureflow.io/api";
+const API_BASE_URL = process.env.FEATUREFLOW_API_URL || "https://api.featureflow.com/api";
 const API_TOKEN = process.env.FEATUREFLOW_API_TOKEN || "";
 
 // Determine authentication method based on token format
